@@ -8,11 +8,6 @@ const ReactDOMServer = require('react-dom/server')
 const React = require('react')
 
 function getDefaultExports(moduleID) {
-  // Clear the require cache, in case the file was
-  // changed since the server was started.
-  const cacheKey = require.resolve(moduleID)
-  delete require.cache[cacheKey]
-
   const moduleExports = require(moduleID)
 
   // Return exports.default if using ES2015 modules.
