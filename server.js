@@ -73,10 +73,19 @@ function handleRequest(workingDir, request, callback) {
     componentPath
   )
 
-  render(
-    React.createElement(component, props),
-    callback
-  )
+  const railsContext = request.railsContext;
+
+  if (typeof(component) === 'function' && typeof(railsContext) === 'object') {
+    render(
+      component(props, railsContext),
+      callback
+    )
+  } else {
+    render(
+      React.createElement(component, props),
+      callback
+    )
+  }
 }
 
 function createRequestHandler(workingDir) {
